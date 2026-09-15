@@ -1,13 +1,73 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/roboto";
+
+/* Local Apple-grade typography: Inter (Latin) */
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter_18pt-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter_18pt-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter_18pt-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter_18pt-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Local Apple-grade typography: Inter Khmer Looped (Khmer) */
+@font-face {
+  font-family: 'Inter Khmer Looped';
+  src: url('./assets/fonts/InterKhmerLooped-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Khmer Looped';
+  src: url('./assets/fonts/InterKhmerLooped-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Khmer Looped';
+  src: url('./assets/fonts/InterKhmerLooped-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter Khmer Looped';
+  src: url('./assets/fonts/InterKhmerLooped-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Roboto Variable', sans-serif;
+    --font-heading: 'Inter', 'Inter Khmer Looped', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+    --font-sans: 'Inter', 'Inter Khmer Looped', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    --font-khmer: 'Inter Khmer Looped', 'Inter', sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,85 +109,184 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.148 0.004 228.8);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.148 0.004 228.8);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.148 0.004 228.8);
-    --primary: oklch(0.218 0.008 223.9);
-    --primary-foreground: oklch(0.987 0.002 197.1);
-    --secondary: oklch(0.963 0.002 197.1);
-    --secondary-foreground: oklch(0.218 0.008 223.9);
-    --muted: oklch(0.963 0.002 197.1);
-    --muted-foreground: oklch(0.56 0.021 213.5);
-    --accent: oklch(0.218 0.008 223.9);
-    --accent-foreground: oklch(0.987 0.002 197.1);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.925 0.005 214.3);
-    --input: oklch(0.925 0.005 214.3);
-    --ring: oklch(0.723 0.014 214.4);
-    --chart-1: oklch(0.855 0.138 181.071);
-    --chart-2: oklch(0.704 0.14 182.503);
-    --chart-3: oklch(0.6 0.118 184.704);
-    --chart-4: oklch(0.511 0.096 186.391);
-    --chart-5: oklch(0.437 0.078 188.216);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.987 0.002 197.1);
-    --sidebar-foreground: oklch(0.148 0.004 228.8);
-    --sidebar-primary: oklch(0.218 0.008 223.9);
-    --sidebar-primary-foreground: oklch(0.987 0.002 197.1);
-    --sidebar-accent: oklch(0.963 0.002 197.1);
-    --sidebar-accent-foreground: oklch(0.218 0.008 223.9);
-    --sidebar-border: oklch(0.925 0.005 214.3);
-    --sidebar-ring: oklch(0.723 0.014 214.4);
+    --background: oklch(0.985 0.005 240);
+    --foreground: oklch(0.15 0.02 260);
+    --card: oklch(1 0 0 / 72%);
+    --card-foreground: oklch(0.15 0.02 260);
+    --popover: oklch(1 0 0 / 90%);
+    --popover-foreground: oklch(0.15 0.02 260);
+    --primary: oklch(0.48 0.18 245);
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.95 0.01 240);
+    --secondary-foreground: oklch(0.2 0.02 250);
+    --muted: oklch(0.94 0.01 240);
+    --muted-foreground: oklch(0.48 0.02 250);
+    --accent: oklch(0.94 0.02 245);
+    --accent-foreground: oklch(0.2 0.02 250);
+    --destructive: oklch(0.58 0.24 27);
+    --border: oklch(0.88 0.01 240 / 60%);
+    --input: oklch(0.88 0.01 240 / 70%);
+    --ring: oklch(0.48 0.18 245);
+    --radius: 1.125rem;
 }
 
 .dark {
-    --background: oklch(0.148 0.004 228.8);
-    --foreground: oklch(0.987 0.002 197.1);
-    --card: oklch(0.218 0.008 223.9);
-    --card-foreground: oklch(0.987 0.002 197.1);
-    --popover: oklch(0.218 0.008 223.9);
-    --popover-foreground: oklch(0.987 0.002 197.1);
-    --primary: oklch(0.925 0.005 214.3);
-    --primary-foreground: oklch(0.218 0.008 223.9);
-    --secondary: oklch(0.275 0.011 216.9);
-    --secondary-foreground: oklch(0.987 0.002 197.1);
-    --muted: oklch(0.275 0.011 216.9);
-    --muted-foreground: oklch(0.723 0.014 214.4);
-    --accent: oklch(0.925 0.005 214.3);
-    --accent-foreground: oklch(0.218 0.008 223.9);
-    --destructive: oklch(0.704 0.191 22.216);
+    --background: oklch(0.11 0.02 260);
+    --foreground: oklch(0.98 0.005 240);
+    --card: oklch(0.17 0.025 260 / 65%);
+    --card-foreground: oklch(0.98 0.005 240);
+    --popover: oklch(0.18 0.025 260 / 88%);
+    --popover-foreground: oklch(0.98 0.005 240);
+    --primary: oklch(0.65 0.18 240);
+    --primary-foreground: oklch(0.11 0.02 260);
+    --secondary: oklch(0.22 0.02 260);
+    --secondary-foreground: oklch(0.98 0.005 240);
+    --muted: oklch(0.2 0.02 260);
+    --muted-foreground: oklch(0.68 0.02 240);
+    --accent: oklch(0.24 0.03 260);
+    --accent-foreground: oklch(0.98 0.005 240);
+    --destructive: oklch(0.7 0.19 22);
     --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.56 0.021 213.5);
-    --chart-1: oklch(0.855 0.138 181.071);
-    --chart-2: oklch(0.704 0.14 182.503);
-    --chart-3: oklch(0.6 0.118 184.704);
-    --chart-4: oklch(0.511 0.096 186.391);
-    --chart-5: oklch(0.437 0.078 188.216);
-    --sidebar: oklch(0.218 0.008 223.9);
-    --sidebar-foreground: oklch(0.987 0.002 197.1);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.987 0.002 197.1);
-    --sidebar-accent: oklch(0.275 0.011 216.9);
-    --sidebar-accent-foreground: oklch(0.987 0.002 197.1);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.56 0.021 213.5);
+    --input: oklch(1 0 0 / 12%);
+    --ring: oklch(0.65 0.18 240);
+}
+
+.maplibregl-ctrl-attrib{
+    display: none;
+}
+
+/* Apple Materials & Translucent Glassmorphism */
+.apple-glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.05);
+    transition: background-color 300ms cubic-bezier(0.32, 0.72, 0, 1),
+                border-color 300ms cubic-bezier(0.32, 0.72, 0, 1),
+                box-shadow 300ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.dark .apple-glass {
+    background: rgba(24, 28, 42, 0.62);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
+}
+
+/* Whole-page View Transition for seamless theme dissolve */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 350ms;
+    animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 2;
+    animation-name: apple-theme-dissolve;
+}
+
+@keyframes apple-theme-dissolve {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fallback synchronized whole-page transition when View Transitions API is not active */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+    transition: background-color 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
+                border-color 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
+                color 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
+                fill 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
+                stroke 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
+                box-shadow 300ms cubic-bezier(0.32, 0.72, 0, 1) !important;
+    transition-delay: 0ms !important;
+}
+
+/* Apple Fluid Tactile Press Feedback */
+.apple-press {
+    transition: transform 120ms cubic-bezier(0.2, 0.8, 0.4, 1), filter 120ms ease, box-shadow 120ms ease;
+    will-change: transform;
+}
+.apple-press:hover {
+    filter: brightness(1.03);
+}
+.apple-press:active {
+    transform: scale(0.965);
+    filter: brightness(0.97);
+}
+
+/* Apple Weather Atmospheric Ambient Aura */
+.atmosphere-sunny {
+    background: radial-gradient(circle at 15% 15%, oklch(0.78 0.18 68 / 18%) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, oklch(0.68 0.16 230 / 14%) 0%, transparent 55%);
+}
+
+.atmosphere-rainy {
+    background: radial-gradient(circle at 20% 15%, oklch(0.52 0.14 220 / 22%) 0%, transparent 55%),
+                radial-gradient(circle at 80% 85%, oklch(0.42 0.16 255 / 26%) 0%, transparent 60%);
+}
+
+.atmosphere-thunder {
+    background: radial-gradient(circle at 50% 12%, oklch(0.48 0.2 295 / 28%) 0%, transparent 60%),
+                radial-gradient(circle at 85% 85%, oklch(0.36 0.16 265 / 35%) 0%, transparent 65%);
+}
+
+.atmosphere-cloudy {
+    background: radial-gradient(circle at 20% 20%, oklch(0.62 0.04 240 / 18%) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, oklch(0.52 0.04 250 / 18%) 0%, transparent 50%);
+}
+
+.atmosphere-night {
+    background: radial-gradient(circle at 85% 15%, oklch(0.65 0.14 275 / 20%) 0%, transparent 50%),
+                radial-gradient(circle at 15% 85%, oklch(0.32 0.12 245 / 30%) 0%, transparent 55%);
+}
+
+/* Maplibre custom popup styling */
+.maplibregl-popup-content {
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.maplibregl-popup-tip {
+    display: none !important;
+}
+
+/* Khmer Typography Safety: Ensure upper vowels and lower subscripts are never clipped */
+.font-khmer {
+    font-family: var(--font-khmer);
+    line-height: 1.55;
+    letter-spacing: 0.01em;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
   button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;
-    }
+  }
   html {
     @apply font-sans;
-    }
+  }
 }
