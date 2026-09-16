@@ -162,9 +162,6 @@
     -webkit-backdrop-filter: blur(28px) saturate(190%);
     border: 1px solid rgba(255, 255, 255, 0.45);
     box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.05);
-    transition: background-color 300ms cubic-bezier(0.32, 0.72, 0, 1),
-                border-color 300ms cubic-bezier(0.32, 0.72, 0, 1),
-                box-shadow 300ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .dark .apple-glass {
@@ -175,44 +172,12 @@
     box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45);
 }
 
-/* Whole-page View Transition for seamless theme dissolve */
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation-duration: 350ms;
-    animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
-    mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-    z-index: 1;
-}
-
-::view-transition-new(root) {
-    z-index: 2;
-    animation-name: apple-theme-dissolve;
-}
-
-@keyframes apple-theme-dissolve {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Fallback synchronized whole-page transition when View Transitions API is not active */
-html.theme-transitioning,
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-    transition: background-color 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
-                border-color 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
-                color 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
-                fill 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
-                stroke 300ms cubic-bezier(0.32, 0.72, 0, 1) !important,
-                box-shadow 300ms cubic-bezier(0.32, 0.72, 0, 1) !important;
-    transition-delay: 0ms !important;
+/* Disable all transitions instantly during theme toggle to prevent color flickering & component-by-component lag (same as s_cool_crm) */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+    transition: none !important;
 }
 
 /* Apple Fluid Tactile Press Feedback */
@@ -288,5 +253,25 @@ html.theme-transitioning *::after {
   }
   html {
     @apply font-sans;
+  }
+
+  /* Prevent page zooming when input or select is focused on mobile screen */
+  @media screen and (max-width: 768px) {
+    input,
+    select,
+    textarea,
+    [data-slot="input"],
+    [data-slot="select-trigger"] {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Prevent unintended double-tap zoom gestures on interactive elements */
+  input,
+  select,
+  textarea,
+  button,
+  [role="button"] {
+    touch-action: manipulation;
   }
 }

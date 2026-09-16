@@ -7,6 +7,7 @@ import {
 import type { WeatherData } from "@/lib/weather-api";
 import { Search, MapPin, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ProvinceSelectorProps {
   activeProvince: Province;
@@ -65,7 +66,7 @@ export function ProvinceSelector({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="ស្វែងរក / Search province..."
-            className="w-full rounded-full border border-border/80 bg-background/70 py-1.5 pl-9 pr-8 text-xs text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 backdrop-blur-md transition-all"
+            className="w-full rounded-full border border-border/80 bg-background/70 py-1.5 pl-9 pr-8 text-[16px] sm:text-xs text-foreground placeholder:text-muted-foreground/70 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 backdrop-blur-md transition-all"
           />
           {searchQuery && (
             <button
@@ -100,55 +101,57 @@ export function ProvinceSelector({
         })}
       </div>
 
-      {/* Province chips grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 max-h-64 pt-1 pb-1 -my-1 px-1 -mx-1 overflow-y-auto">
-        {filteredProvinces.map((prov) => {
-          const isActive = prov.id === activeProvince.id;
-          const weather = weatherMap[prov.queryParam.toLowerCase()];
-          const temp = weather ? `${Math.round(weather.temp_c)}°C` : null;
+      {/* Province chips grid with ScrollArea */}
+      <ScrollArea className="h-68 sm:h-72 w-full pr-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 pt-1 pb-2">
+          {filteredProvinces.map((prov) => {
+            const isActive = prov.id === activeProvince.id;
+            const weather = weatherMap[prov.queryParam.toLowerCase()];
+            const temp = weather ? `${Math.round(weather.temp_c)}°C` : null;
 
-          return (
-            <button
-              key={prov.id}
-              onClick={() => onSelectProvince(prov)}
-              className={cn(
-                "group relative flex items-center justify-between rounded-2xl px-3 py-2.5 text-left transition-all apple-press cursor-pointer border",
-                isActive
-                  ? "bg-primary/20 border-primary text-primary font-semibold shadow-xs ring-1 ring-primary/40"
-                  : "bg-card/60 hover:bg-card/90 border-border/60 text-foreground hover:border-border shadow-2xs"
-              )}
-            >
-              <div className="truncate pr-1">
-                <div className="text-xs font-semibold leading-snug py-0.5 font-khmer">
-                  {prov.nameKh}
-                </div>
-                <div className="text-[10px] text-muted-foreground/80 truncate tracking-tight">
-                  {prov.nameEn}
-                </div>
-              </div>
-
-              <div className="flex items-center gap-1.5 shrink-0">
-                {temp && (
-                  <span className="text-[11px] font-mono font-medium text-foreground/90">
-                    {temp}
-                  </span>
+            return (
+              <button
+                key={prov.id}
+                onClick={() => onSelectProvince(prov)}
+                className={cn(
+                  "group relative flex items-center justify-between rounded-2xl px-3 py-2.5 text-left transition-all apple-press cursor-pointer border",
+                  isActive
+                    ? "bg-primary/20 border-primary text-primary font-semibold shadow-xs ring-1 ring-primary/40"
+                    : "bg-card/60 hover:bg-card/90 border-border/60 text-foreground hover:border-border shadow-2xs"
                 )}
-                {isActive && (
-                  <div className="size-4 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-xs">
-                    <Check className="size-2.5" />
+              >
+                <div className="truncate pr-1">
+                  <div className="text-xs font-semibold leading-snug py-0.5 font-khmer">
+                    {prov.nameKh}
                   </div>
-                )}
-              </div>
-            </button>
-          );
-        })}
+                  <div className="text-[10px] text-muted-foreground/80 truncate tracking-tight">
+                    {prov.nameEn}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  {temp && (
+                    <span className="text-[11px] font-mono font-medium text-foreground/90">
+                      {temp}
+                    </span>
+                  )}
+                  {isActive && (
+                    <div className="size-4 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-xs">
+                      <Check className="size-2.5" />
+                    </div>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
 
         {filteredProvinces.length === 0 && (
           <div className="col-span-full py-8 text-center text-xs text-muted-foreground font-medium">
             រកមិនឃើញរាជធានី-ខេត្តដែលត្រូវគ្នានឹង &quot;{searchQuery}&quot; ទេ · No provinces matching query
           </div>
         )}
-      </div>
+      </ScrollArea>
     </div>
   );
 }

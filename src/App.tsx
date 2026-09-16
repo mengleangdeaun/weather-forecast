@@ -27,18 +27,18 @@ export function App() {
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("kh_weather_theme");
       if (saved === "light" || saved === "dark") return saved;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "dark"; // Default to premium dark
+      return "light"; // Default to light mode
     }
-    return "dark";
+    return "light";
   });
 
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     }
     localStorage.setItem("kh_weather_theme", theme);
   }, [theme]);
@@ -46,38 +46,23 @@ export function App() {
   const handleToggleTheme = () => {
     const nextTheme: "light" | "dark" = theme === "dark" ? "light" : "dark";
 
-    const applyThemeChange = () => {
-      if (nextTheme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-      setTheme(nextTheme);
-      localStorage.setItem("kh_weather_theme", nextTheme);
-    };
+    // Disable all CSS transitions instantly during theme toggle to prevent flickering and component-by-component lag (same as s_cool_crm)
+    document.documentElement.classList.add("theme-switching");
 
-    // Use native View Transitions API for seamless whole-page dissolve
-    if (
-      typeof document !== "undefined" &&
-      "startViewTransition" in document &&
-      typeof (document as Document & { startViewTransition?: (cb: () => void) => void })
-        .startViewTransition === "function"
-    ) {
-      (document as Document & { startViewTransition: (cb: () => void) => void }).startViewTransition(
-        () => {
-          applyThemeChange();
-        }
-      );
-    } else if (typeof document !== "undefined") {
-      // Fallback: synchronized whole-page transition
-      document.documentElement.classList.add("theme-transitioning");
-      applyThemeChange();
-      window.setTimeout(() => {
-        document.documentElement.classList.remove("theme-transitioning");
-      }, 350);
+    if (nextTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else {
-      applyThemeChange();
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     }
+
+    setTheme(nextTheme);
+    localStorage.setItem("kh_weather_theme", nextTheme);
+
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-switching");
+    }, 50);
   };
 
 
@@ -214,7 +199,7 @@ export function App() {
   return (
     <div
       className={cn(
-        "min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300 overflow-x-hidden w-full pt-14 sm:pt-16",
+        "min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden w-full pt-14 sm:pt-16",
         atmosphereClass
       )}
     >

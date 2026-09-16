@@ -8,6 +8,7 @@ import {
   forwardRef,
   useContext,
   useEffect,
+  useLayoutEffect,
   useImperativeHandle,
   useMemo,
   useRef,
@@ -334,9 +335,11 @@ export function MapMarker({
     return markerInstance;
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!map) return;
-    marker.addTo(map);
+    if (!(marker as unknown as { _map?: unknown })._map) {
+      marker.addTo(map);
+    }
     return () => {
       marker.remove();
     };
@@ -430,10 +433,12 @@ export function MarkerPopup({
 
   useEffect(() => {
     if (!map) return;
-    popup.on("close", () => onClose?.());
+    const handleClose = () => onClose?.();
+    popup.on("close", handleClose);
     marker.setPopup(popup);
 
     return () => {
+      popup.off("close", handleClose);
       marker.setPopup(null);
     };
   }, [map, marker, popup, onClose]);
@@ -441,7 +446,14 @@ export function MarkerPopup({
   useEffect(() => {
     if (!map || open === undefined) return;
     if (open) {
-      if (!popup.isOpen()) marker.togglePopup();
+      if (!popup.isOpen()) {
+        if (!(marker as unknown as { _map?: unknown })._map) {
+          marker.addTo(map);
+        }
+        if ((marker as unknown as { _map?: unknown })._map) {
+          marker.togglePopup();
+        }
+      }
     } else {
       if (popup.isOpen()) popup.remove();
     }

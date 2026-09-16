@@ -19,7 +19,7 @@ export function LocationBanner({
   if (!status) return null;
 
   return (
-    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-3">
+    <div className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-6">
       {status === "locating" && (
         <div className="flex items-center justify-between gap-3 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-2.5 text-xs text-primary backdrop-blur-md animate-pulse">
           <div className="flex items-center gap-2">
@@ -42,7 +42,7 @@ export function LocationBanner({
           </div>
           <button
             onClick={onDismiss}
-            className="rounded p-1 hover:bg-emerald-500/20 cursor-pointer apple-press"
+            className="rounded-full p-1 hover:bg-emerald-500/20 cursor-pointer apple-press"
           >
             <X className="size-3.5" />
           </button>
