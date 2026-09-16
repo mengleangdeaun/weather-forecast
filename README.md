@@ -1,4 +1,4 @@
-# 🇰🇭 ការព្យាករណ៍អាកាសធាតុកម្ពុជា · Cambodia Weather Forecast
+# ការព្យាករណ៍អាកាសធាតុកម្ពុជា · Cambodia Weather Forecast
 
 A modern, high-performance real-time weather forecasting and interactive geospatial application covering all 25 provinces and the capital city of Cambodia. Built with React 19, TypeScript, Vite, Tailwind CSS v4, and MapLibre GL with Apple-inspired human interface aesthetics.
 
@@ -46,7 +46,7 @@ A modern, high-performance real-time weather forecasting and interactive geospat
 | **Build Tool** | [Vite 8](https://vitejs.dev/) |
 | **Styling** | [Tailwind CSS v4](https://tailwindcss.com/) + Custom Glassmorphic System |
 | **Map Engine** | [MapLibre GL](https://maplibre.org/) |
-| **Components & Primitives** | [Base UI](https://base-ui.com/) (`ScrollArea`), Lucide React |
+| **Components & Primitives** | [Base UI](https://base-ui.com/) |
 | **Icons** | [Lucide React](https://lucide.dev/) |
 | **Deployment** | GitHub Actions & GitHub Pages |
 
