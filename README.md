@@ -132,7 +132,7 @@ The optimized bundle will be compiled into the `dist/` directory.
 ## 🚢 Deployment
 
 The repository is configured with automated continuous deployment via GitHub Actions:
-- Any commit pushed to the `main` or `master` branch automatically triggers `.github/workflows/deploy.yml`.
+- Any commit pushed to the `main` branch automatically triggers `.github/workflows/deploy.yml`.
 - The application is built and deployed directly to GitHub Pages.
 
 ---
